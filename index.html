@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Healthcare Chatbot</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+<div class="page">
+<header class="hero">
+<h1>Healthcare Diagnosis Chatbot</h1>
+<h2>🌟 WELCOME! 🌿💙 Stay healthy, stay happy! 😄✨</h2>
+<p class="lead">Select symptoms and the model will predict the possible disease.</p>
+<div class="auth-links">
+{% if session.get('user') %}
+<span>Welcome, {{ session.get('user') }}</span> |
+<a href="/logout" style="color: yellow;">Logout</a>
+{% else %}
+<a href="/login" class="btn small">Login</a>
+<a href="/register" class="btn small outline">Register</a>
+{% endif %}
+</div>
+</header>
+<main class="container">
+
+<section class="card">
+<h2>Symptoms</h2>
+<p>Select all symptoms:</p>
+
+<form action="/predict" method="POST">
+<div class="symptom-grid">
+{% for s in symptoms %}
+<label class="symptom-item">
+<input type="checkbox" name="{{ s }}" value="1">
+<span>{{ s.replace('_',' ').capitalize() }}</span>
+</label>
+{% endfor %}
+</div>
+<div class="actions" style="margin-top:15px;">
+ 
+<button type="submit" class="btn primary">Predict Disease</button>
+<button type="reset" class="btn">Clear</button>
+</div>
+</form>
+</section>
+
+<section class="card info">
+<h3>Hope you have a Healthy life</h3>
+<p>💐 “Sending you good vibes, warm wishes, and lots of strength.” 💛✨
+🌟 “Stay happy, stay healthy, and keep shining like the star you are.” ⭐💙</p>
+</section>
+</main>
+
+<footer class="foot">
+Converted from your Tkinter project → now multi-page Flask UI
+</footer>
+</div>
+</body>
+</html>
+
+style.css
+:root{
+--bg:#eef6ff; --card:#ffffff; --accent:#2f80ed; --muted:#6b7280
+}
+*{
+box-sizing:border-box
+}
+body
+{
+font-family:Inter, Arial, sans-serif;background:var(--bg);margin:0;color:#0f172a
+}
+.page{
+min-height:100vh;display:flex;flex-direction:column
+}
+.hero{
+background:linear-gradient(90deg,#ffffff00,#ffffff00);padding:28px;text-align:center
+}
+.container{
+width:92%;max-width:1000px;margin:22px auto;display:grid;grid-template-columns:1fr;gap:18px
+}
+.card{
+ 
+background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(20,20,20,0.06)
+}
+.symptom-grid{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px
+}
+.symptom-item{
+display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;border:1px solid #eee
+}
+.symptom-item input{ width:18px;height:18px
+}
+.btn{
+padding:10px 14px;border-radius:10px;border:none;cursor:pointer;background:#f3f4f6
+}
+.btn.primary{
+background:var(--accent);color:white
+}
+.btn.small
+{
+padding:6px 10px
+}
+.btn.outline{
+background:transparent;border:1px solid #ddd
+}
+.actions{
+margin-top:12px;display:flex;gap:10px
+}
+.result{
+margin-top:16px;padding:10px;border-radius:8px;background:#fcfeff;border:1px solid #eef2ff
+}
+.auth-screen{
+display:flex;align-items:center;justify-content:center;height:70vh
+}
+.form-card{ width:320px
+}
+.form-card input{
+width:100%;padding:10px;margin:6px 0;border:1px solid#e6e9ef;border-radius:8px
+}
+.error{
+background:#ffecec;padding:8px;border-radius:6px;color:#a00
+}
+.foot
+{text- align:center;padding:14px;color:var(--muted);font-size:14px }

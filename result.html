@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnosis Result</title>
+<link rel="stylesheet" href="/static/style.css">
+
+<style> body {
+background: #f4f7fb; margin: 0;
+font-family: Arial, sans-serif;
+}
+.page {
+max-width: 900px; margin: auto; padding: 20px;
+}
+ 
+
+.card {
+background: white; padding: 25px; border-radius: 12px;
+box-shadow: 0 3px 12px rgba(0,0,0,0.1); margin-bottom: 25px;
+}
+
+h1 {
+text-align: center; color: #4a90e2;
+}
+.section-title { margin-top: 25px; font-size: 20px; color: #333;
+border-left: 4px solid #4a90e2; padding-left: 8px;
+}
+ul {
+list-style-type: "✔ "; padding-left: 20px; color: #444;
+}
+.back-btn { display: block; width: 200px;
+margin: 20px auto; padding: 12px; background: #4a90e2; color: white;
+border: none; text-align: center;
+border-radius: 8px; text-decoration: none; font-size: 16px;
+}
+.back-btn:hover { opacity: 0.8;
+}
+.doctor-box { background: #eef6ff;
+ 
+padding: 12px; border-radius: 8px;
+border-left: 4px solid #4a90e2; margin-bottom: 10px;
+}
+.icon {
+margin-right: 6px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<h1>□ Diagnosis Result</h1>
+<div class="card">
+<h2 class="section-title">
+<span class="icon">□</span> Predicted Disease
+</h2>
+<p><strong>Disease:</strong> {{ data.disease }}</p>
+<p><strong>Confidence:</strong> {{ data.confidence }}</p>
+<h2 class="section-title">
+<span class="icon">👨□</span> Recommended Doctor
+</h2>
+<div class="doctor-box">
+<p><strong>{{ data.doctor_name }}</strong></p>
+{% if data.doctor_link != "#" %}
+<a href="{{ data.doctor_link }}" target="_blank">Visit Doctor</a>
+{% else %}
+<p>No link available</p>
+{% endif %}
+</div>
+<h2 class="section-title">
+<span class="icon">✅</span> Do's (Recommended)
+</h2>
+<ul>
+{% for item in data.dos %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+ 
+<h2 class="section-title">
+<span class="icon">❌</span> Don'ts (Avoid)
+</h2>
+<ul>
+{% for item in data.donts %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+<h2 class="section-title">
+<span class="icon">⚠️</span>  Immediate  Measures
+</h2>
+<ul>
+{% for item in data.measures %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+<h2 class="section-title">
+<span class="icon">💊</span> Suggested Medicines (OTC)
+</h2>
+<ul>
+{% for item in data.medicines %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+</div>
+
+<a href="/home" class="back-btn">⬅ Back to Symptoms</a>
+</div>
+
+</body>
+</html>
